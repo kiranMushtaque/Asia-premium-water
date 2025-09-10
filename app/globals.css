@@ -1,0 +1,27 @@
+/* @tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-family: sans-serif;
+    cursor: url('/images/cursorwaterdrop.png') 16 16, auto;
+    
+} */
+
+
+
+
+
+
+
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-family: 'Inter', sans-serif;
+  cursor: url('/images/cursorwaterdrop.png') 16 16, auto;
+  background-color: #ffffff;
+  color: #1f2937; /* dark gray text for readability */
+}
