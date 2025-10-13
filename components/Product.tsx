@@ -80,17 +80,18 @@ const products: Product[] = [
   },
 ];
 
-// WOW OFFER
 const wowOffer: Product = {
   id: 999,
   name: "WOW OFFER · 12+1",
-  size: "12 Cartons + 1 FREE",
+  size: "12 Cartons (500ml) + Get 1 Carton FREE",
   image: "/images/wowpop.jpeg",
-  price: 12 * 130,
-  description: "Buy 12 cartons and get 1 FREE. Limited‑time bulk deal.",
+  price: 12 * 360,
+  description:
+    "Buy 12 cartons (500ml each) and get 1 FREE. Limited‑time bulk deal.",
   badge: "WOW OFFER",
   gradient: "from-orange-400 to-red-500",
 };
+
 
 export default function ProductsPage() {
   const { addToCart } = useCart();
@@ -141,6 +142,7 @@ export default function ProductsPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50">
+     
       {/* WOW OFFER */}
       <motion.div className="max-w-6xl mx-auto mb-12 sm:mb-16 px-4 pt-8">
         <div className="relative bg-gradient-to-br from-orange-400 via-yellow-400 to-red-400 rounded-3xl p-1">
@@ -155,6 +157,9 @@ export default function ProductsPage() {
               </motion.h2>
               <p className="text-xl sm:text-2xl font-bold text-gray-900">
                 Buy 12 cartons, get 1 FREE
+              </p>
+              <p className="text-lg sm:text-xl font-semibold text-orange-600">
+                500ml
               </p>
               <p className="text-sm sm:text-base text-gray-600">
                 Limited‑time bulk deal. While stocks last.
