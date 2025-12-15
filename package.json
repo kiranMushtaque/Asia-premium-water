@@ -29,9 +29,9 @@
   },
   "devDependencies": {
     "@types/i18next-browser-languagedetector": "^3.0.0",
-    "@types/node": "^24.1.0",
-    "@types/react": "^19.1.9",
-    "@types/react-dom": "^19.1.7",
+    "@types/node": "^24.10.4",
+    "@types/react": "^19.2.7",
+    "@types/react-dom": "^19.2.3",
     "typescript": "^5.9.2"
   }
 }
