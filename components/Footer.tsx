@@ -1,5 +1,11 @@
 
 
+
+
+
+
+
+
 "use client";
 import { type FC } from "react";
 import { QRCodeCanvas } from "qrcode.react";
@@ -17,18 +23,7 @@ interface Certification {
   logo: string;
 }
 
-const footerCertifications: Certification[] = [
-  { title: "Halal Certificate", logo: "/certificates/halal.logo.png" },
-  { title: "PSQCA License", logo: "/certificates/psqca_logo.jpg" },
-  {
-    title: "ISO 9001 Certificate",
-    logo: "/certificates/SB - ISO 9001 Certificate - SD Bottlers.logo.png",
-  },
-  {
-    title: "SFA License",
-    logo: "/certificates/SFA LICENSE - SD BOTTLERS  (1).logo.png",
-  },
-];
+
 
 const FooterComponent: FC = () => {
   const phoneDisplay = "0300-0628873";
@@ -165,25 +160,7 @@ const FooterComponent: FC = () => {
         </div>
 
         {/* Certifications */}
-        <div className="mt-16 pt-8 border-t border-slate-700">
-          <h4 className="text-lg font-semibold text-white text-center mb-8">
-            Our Certifications
-          </h4>
-          <div className="flex flex-wrap justify-center items-center gap-8">
-            {footerCertifications.map((cert, idx) => (
-              <div
-                key={idx}
-                className="w-20 h-20 bg-white rounded-lg flex items-center justify-center p-2 shadow-md hover:shadow-lg transition-shadow duration-200"
-              >
-                <img
-                  src={cert.logo}
-                  alt={cert.title}
-                  className="object-contain w-full h-full"
-                />
-              </div>
-            ))}
-          </div>
-        </div>
+       
 
         {/* Social & Copyright */}
         <div className="mt-12 pt-8 border-t border-slate-700 flex flex-col sm:flex-row items-center justify-between gap-6">

@@ -11,14 +11,14 @@ import {
 const certificates = [
   {
     title: "Halal Certificate",
-    pdf: "/certificates/Halal Certificate.pdf",
+    pdf: "/certificates/Halal-Certificate.pdf",
     icon: ShieldCheck,
     color: "from-emerald-400 to-emerald-600",
     description: "Certified Halal compliance",
   },
   {
     title: "PSQCA License – SD Bottlers 2025",
-    pdf: "/certificates/PSQCA LICENSE - SD BOTTLERS 2025.pdf",
+    pdf: "/certificates/Psqca-Certificate.pdf",
     icon: Award,
     color: "from-blue-400 to-blue-600",
     description: "Pakistan Standards Quality Control",
@@ -32,7 +32,7 @@ const certificates = [
   },
   {
     title: "SFA License – SD Bottlers",
-    pdf: "/certificates/SFA LICENSE - SD BOTTLERS  (1).pdf",
+    pdf: "/certificates/Sfa-Certificate.pdf",
     icon: FileText,
     color: "from-orange-400 to-orange-600",
     description: "Singapore Food Agency Approved",

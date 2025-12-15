@@ -51,23 +51,23 @@ const CloseIcon: React.FC<{ className?: string }> = ({ className }) => (
 const certificates: Certificate[] = [
   {
     title: "Halal Certificate",
-    pdf: "/certificates/Halal Certificate.pdf",
-    logo: "/certificates/halal.logo.png",
+    pdf: "/certificates/Halal-Certificate.pdf",
+    logo: "/logo/logo-3.jpeg",
   },
   {
     title: "PSQCA License – SD Bottlers 2025",
-    pdf: "/certificates/PSQCA LICENSE - SD BOTTLERS 2025.pdf",
-    logo: "/certificates/psqca_logo.jpg",
+    pdf: "/certificates/Psqca-Certificate.pdf",
+    logo: "/logo/logo-4.jpeg",
   },
   {
     title: "ISO 9001 Certificate – SD Bottlers",
     pdf: "/certificates/SB - ISO 9001 Certificate - SD Bottlers.pdf",
-    logo: "/certificates/SB - ISO 9001 Certificate - SD Bottlers.logo.png",
+    logo: "/logo/logo-2.png",
   },
   {
     title: "SFA License – SD Bottlers",
-    pdf: "/certificates/SFA LICENSE - SD BOTTLERS  (1).pdf",
-    logo: "/certificates/SFA LICENSE - SD BOTTLERS  (1).logo.png",
+    pdf: "/certificates/Sfa-Certificate.pdf",
+    logo: "/logo/logo-1.jpeg",
   },
 ];
 
