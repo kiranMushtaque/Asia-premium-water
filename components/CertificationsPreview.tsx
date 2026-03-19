@@ -24,13 +24,6 @@ const certificates = [
     description: "Pakistan Standards Quality Control",
   },
   {
-    title: "ISO 9001 Certificate – SD Bottlers",
-    pdf: "/certificates/SB - ISO 9001 Certificate - SD Bottlers.pdf",
-    icon: CheckCircle,
-    color: "from-purple-400 to-purple-600",
-    description: "International Quality Management",
-  },
-  {
     title: "SFA License – SD Bottlers",
     pdf: "/certificates/Sfa-Certificate.pdf",
     icon: FileText,
