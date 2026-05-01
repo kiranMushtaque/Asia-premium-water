@@ -60,11 +60,6 @@ const certificates: Certificate[] = [
     logo: "/logo/logo-4.jpeg",
   },
   {
-    title: "ISO 9001 Certificate – SD Bottlers",
-    pdf: "/certificates/SB - ISO 9001 Certificate - SD Bottlers.pdf",
-    logo: "/logo/logo-2.png",
-  },
-  {
     title: "SFA License – SD Bottlers",
     pdf: "/certificates/Sfa-Certificate.pdf",
     logo: "/logo/logo-1.jpeg",
