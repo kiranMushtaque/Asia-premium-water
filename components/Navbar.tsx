@@ -346,6 +346,349 @@
 //   );
 // }
 
+// "use client";
+
+// import Image from "next/image";
+// import { usePathname, useRouter } from "next/navigation";
+// import { useState, useEffect } from "react";
+// import { useCart } from "../context/CartContext";
+// import { HiOutlineMenu, HiOutlineX, HiPhone } from "react-icons/hi";
+
+// type ShopKey = "retail" | "wholesale" | "institutions";
+
+// export default function Navbar() {
+//   const { getTotalItems } = useCart();
+//   const router = useRouter();
+//   const pathname = usePathname();
+
+//   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+//   const [desktopMegaOpen, setDesktopMegaOpen] = useState(false);
+//   const [mobileShopOpen, setMobileShopOpen] = useState(false);
+//   const [openShopModal, setOpenShopModal] = useState<ShopKey | null>(null);
+//   const [activeSection, setActiveSection] = useState("home");
+
+//   const navItems = [
+//     { label: "Home", id: "home" },
+//     { label: "About Us", id: "about" },
+//     { label: "Products", id: "products" },
+//     { label: "Certifications", id: "certifications" },
+//     { label: "Contact", id: "contact" },
+//   ];
+
+//   const shopInfo: Record<
+//     ShopKey,
+//     { title: string; content: string; icon: string }
+//   > = {
+//     retail: {
+//       title: "Retail Shops",
+//       content:
+//         "Keep your shelves stocked with Asia Water's certified pure drinking water.",
+//       icon: "🛒",
+//     },
+//     wholesale: {
+//       title: "Wholesale Shops",
+//       content: "Competitive bulk rates and reliable supply for your business.",
+//       icon: "📦",
+//     },
+//     institutions: {
+//       title: "Institutions",
+//       content: "Schools, offices, factories, hospitals & large organizations.",
+//       icon: "🏢",
+//     },
+//   };
+
+//   const handleNavClick = (id: string, e?: React.MouseEvent<HTMLElement>) => {
+//     e?.preventDefault();
+//     setMobileMenuOpen(false);
+//     setMobileShopOpen(false);
+//     setDesktopMegaOpen(false);
+
+//     if (id === "certifications") {
+//       router.push("/certifications");
+//       return;
+//     }
+
+//     if (pathname === "/" || pathname === "/home") {
+//       if (id === "home") {
+//         window.scrollTo({ top: 0, behavior: "smooth" });
+//       } else {
+//         const el = document.getElementById(id);
+//         if (el) {
+//           el.scrollIntoView({ behavior: "smooth", block: "start" });
+//         }
+//       }
+//       setActiveSection(id);
+//     } else {
+//       window.location.href = `/#${id}`;
+//     }
+//   };
+
+//   useEffect(() => {
+//     const handleHashChange = () => {
+//       const hash = window.location.hash.replace("#", "");
+//       if (hash) {
+//         const el = document.getElementById(hash);
+//         if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+//         setActiveSection(hash);
+//       }
+//     };
+
+//     if (pathname === "/") handleHashChange();
+//     window.addEventListener("hashchange", handleHashChange);
+//     return () => window.removeEventListener("hashchange", handleHashChange);
+//   }, [pathname]);
+
+//   const openModal = (key: ShopKey) => {
+//     setOpenShopModal(key);
+//     setDesktopMegaOpen(false);
+//     setMobileShopOpen(false);
+//     setMobileMenuOpen(false);
+//   };
+
+//   const closeModal = () => setOpenShopModal(null);
+
+//   const CartButton = () => (
+//     <button
+//       onClick={() => router.push("/cart")}
+//       className="relative flex items-center gap-2 px-6 py-3 bg-cyan-600 hover:bg-cyan-700 text-white font-semibold rounded-full transition-all duration-300 shadow-md active:scale-95"
+//     >
+//       <svg
+//         xmlns="http://www.w3.org/2000/svg"
+//         className="h-5 w-5"
+//         fill="none"
+//         viewBox="0 0 24 24"
+//         stroke="currentColor"
+//       >
+//         <path
+//           strokeLinecap="round"
+//           strokeLinejoin="round"
+//           strokeWidth={2}
+//           d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2 9h12l-2-9M17 21a1 1 0 11-2 0 1 1 0 012 0zm-8 0a1 1 0 11-2 0 1 1 0 012 0z"
+//         />
+//       </svg>
+//       Cart
+//       {getTotalItems() > 0 && (
+//         <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold px-2.5 py-0.5 rounded-full">
+//           {getTotalItems()}
+//         </span>
+//       )}
+//     </button>
+//   );
+
+//   return (
+//     <>
+//       <nav className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md shadow-sm border-b border-gray-100">
+//         <div className="max-w-7xl mx-auto px-6 lg:px-8">
+//           <div className="flex justify-between items-center h-20">
+//             {/* Logo */}
+//             <div
+//               className="flex items-center cursor-pointer"
+//               onClick={(e) => handleNavClick("home", e)}
+//             >
+//               <div className="relative w-48 h-20">
+//                 <Image
+//                   src="/images/Asia-Website-logo.png"
+//                   alt="Asia Premium Water"
+//                   fill
+//                   sizes="(max-width: 768px) 180px, 220px"
+//                   priority
+//                   style={{ objectFit: "contain" }}
+//                   className="logo-glow"
+//                 />
+//               </div>
+//             </div>
+
+//             {/* Desktop Navigation */}
+//             <div className="hidden lg:flex items-center gap-x-9 text-base font-medium">
+//               {navItems.map((item) => (
+//                 <a
+//                   key={item.id}
+//                   href={`#${item.id}`}
+//                   onClick={(e) => handleNavClick(item.id, e)}
+//                   className={`transition-colors hover:text-cyan-700 ${
+//                     activeSection === item.id
+//                       ? "text-cyan-700"
+//                       : "text-gray-700"
+//                   }`}
+//                 >
+//                   {item.label}
+//                 </a>
+//               ))}
+
+//               {/* Desktop Mega Menu */}
+//               <div
+//                 className="relative"
+//                 onMouseEnter={() => setDesktopMegaOpen(true)}
+//                 onMouseLeave={() => setDesktopMegaOpen(false)}
+//               >
+//                 <button className="flex items-center gap-1.5 text-gray-700 hover:text-cyan-700 transition-colors">
+//                   Shops
+//                   <span
+//                     className={`text-sm transition-transform duration-300 ${desktopMegaOpen ? "rotate-180" : ""}`}
+//                   >
+//                     ▼
+//                   </span>
+//                 </button>
+
+//                 {desktopMegaOpen && (
+//                   <div className="absolute top-full left-1/2 -translate-x-1/2 mt-5 w-[740px] bg-white rounded-3xl shadow-2xl border border-gray-100 overflow-hidden">
+//                     <div className="p-10 grid grid-cols-3 gap-8">
+//                       {(
+//                         ["retail", "wholesale", "institutions"] as ShopKey[]
+//                       ).map((key) => (
+//                         <div
+//                           key={key}
+//                           onClick={() => openModal(key)}
+//                           className="group p-6 rounded-2xl hover:bg-cyan-50 transition-all cursor-pointer"
+//                         >
+//                           <div className="text-4xl mb-5">
+//                             {shopInfo[key].icon}
+//                           </div>
+//                           <h3 className="font-semibold text-xl text-gray-900 mb-3 group-hover:text-cyan-700">
+//                             {shopInfo[key].title}
+//                           </h3>
+//                           <p className="text-gray-600 text-[15px] leading-relaxed">
+//                             {shopInfo[key].content}
+//                           </p>
+//                         </div>
+//                       ))}
+//                     </div>
+//                   </div>
+//                 )}
+//               </div>
+//             </div>
+
+//             {/* Desktop Right Side */}
+//             <div className="hidden lg:flex items-center gap-6">
+//               <a
+//                 href="tel:03000628873"
+//                 className="flex items-center gap-3 group"
+//               >
+//                 <div className="w-11 h-11 flex items-center justify-center bg-cyan-50 rounded-2xl group-hover:bg-cyan-100 transition-all">
+//                   <HiPhone className="text-3xl text-cyan-600" />
+//                 </div>
+//                 <div className="leading-tight">
+//                   <p className="text-xs text-gray-500 font-medium">
+//                     Call for Order
+//                   </p>
+//                   <p className="font-semibold text-xl text-gray-800 tracking-tight">
+//                     0300-0628873
+//                   </p>
+//                 </div>
+//               </a>
+//               <CartButton />
+//             </div>
+
+//             {/* Mobile Right Side */}
+//             <div className="lg:hidden flex items-center gap-4">
+//               <a href="tel:03000628873" className="text-cyan-600">
+//                 <HiPhone size={28} />
+//               </a>
+//               <CartButton />
+//               <button
+//                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+//                 className="text-gray-700 p-1"
+//               >
+//                 {mobileMenuOpen ? (
+//                   <HiOutlineX size={30} />
+//                 ) : (
+//                   <HiOutlineMenu size={30} />
+//                 )}
+//               </button>
+//             </div>
+//           </div>
+//         </div>
+
+//         {/* Mobile Menu */}
+//         {mobileMenuOpen && (
+//           <div className="lg:hidden bg-white border-t shadow-md">
+//             <div className="px-6 py-8 flex flex-col gap-6 text-lg">
+//               {navItems.map((item) => (
+//                 <a
+//                   key={item.id}
+//                   href={`#${item.id}`}
+//                   onClick={(e) => handleNavClick(item.id, e)}
+//                   className="text-gray-700 hover:text-cyan-700 font-medium py-1"
+//                 >
+//                   {item.label}
+//                 </a>
+//               ))}
+
+//               {/* ==================== FIXED MOBILE SHOPS ==================== */}
+//               <div>
+//                 <button
+//                   onClick={() => setMobileShopOpen(!mobileShopOpen)}
+//                   className="w-full flex justify-between items-center text-left font-medium text-gray-900 py-3 border-t border-b border-gray-200"
+//                 >
+//                   Shops
+//                   <span
+//                     className={`transition-transform duration-300 ${mobileShopOpen ? "rotate-180" : ""}`}
+//                   >
+//                     ▼
+//                   </span>
+//                 </button>
+
+//                 {mobileShopOpen && (
+//                   <div className="pl-4 mt-4 space-y-3">
+//                     {(["retail", "wholesale", "institutions"] as ShopKey[]).map(
+//                       (key) => (
+//                         <button
+//                           key={key}
+//                           onClick={() => openModal(key)}
+//                           className="w-full text-left px-5 py-4 rounded-2xl border border-gray-100 hover:border-cyan-200 hover:bg-cyan-50 active:bg-cyan-100 transition-all text-gray-700 hover:text-cyan-700 font-medium active:scale-[0.98]"
+//                         >
+//                           {shopInfo[key].title}
+//                         </button>
+//                       ),
+//                     )}
+//                   </div>
+//                 )}
+//               </div>
+//             </div>
+//           </div>
+//         )}
+//       </nav>
+
+//       {/* Shops Modal */}
+//       {openShopModal && (
+//         <div
+//           className="fixed inset-0 bg-black/70 z-[70] flex items-center justify-center p-4"
+//           onClick={closeModal}
+//         >
+//           <div
+//             className="bg-white rounded-3xl max-w-md w-full p-9 shadow-xl"
+//             onClick={(e) => e.stopPropagation()}
+//           >
+//             <div className="text-6xl text-center mb-6">
+//               {shopInfo[openShopModal].icon}
+//             </div>
+
+//             <h2 className="text-3xl font-bold text-center mb-6">
+//               {shopInfo[openShopModal].title}
+//             </h2>
+
+//             <p className="text-gray-600 text-center leading-relaxed text-lg">
+//               {shopInfo[openShopModal].content}
+//             </p>
+
+//             <button
+//               onClick={closeModal}
+//               className="mt-10 w-full py-4 bg-cyan-600 hover:bg-cyan-700 active:bg-cyan-800 text-white rounded-2xl font-semibold text-lg transition-all"
+//             >
+//               Close
+//             </button>
+//           </div>
+//         </div>
+//       )}
+
+//       <style jsx>{`
+//         .logo-glow {
+//           filter: drop-shadow(0 0 8px rgba(34, 211, 238, 0.5));
+//         }
+//       `}</style>
+//     </>
+//   );
+// }
 
 "use client";
 
@@ -413,10 +756,9 @@ export default function Navbar() {
       if (id === "home") {
         window.scrollTo({ top: 0, behavior: "smooth" });
       } else {
-        const el = document.getElementById(id);
-        if (el) {
-          el.scrollIntoView({ behavior: "smooth", block: "start" });
-        }
+        document
+          .getElementById(id)
+          ?.scrollIntoView({ behavior: "smooth", block: "start" });
       }
       setActiveSection(id);
     } else {
@@ -428,8 +770,9 @@ export default function Navbar() {
     const handleHashChange = () => {
       const hash = window.location.hash.replace("#", "");
       if (hash) {
-        const el = document.getElementById(hash);
-        if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+        document
+          .getElementById(hash)
+          ?.scrollIntoView({ behavior: "smooth", block: "start" });
         setActiveSection(hash);
       }
     };
@@ -451,7 +794,7 @@ export default function Navbar() {
   const CartButton = () => (
     <button
       onClick={() => router.push("/cart")}
-      className="relative flex items-center gap-2 px-6 py-3 bg-cyan-600 hover:bg-cyan-700 text-white font-semibold rounded-full transition-all duration-300 shadow-md active:scale-95"
+      className="relative flex items-center gap-2 px-5 py-2.5 bg-cyan-600 hover:bg-cyan-700 text-white font-semibold rounded-full transition-all active:scale-95 text-sm shadow-md"
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -467,9 +810,9 @@ export default function Navbar() {
           d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2 9h12l-2-9M17 21a1 1 0 11-2 0 1 1 0 012 0zm-8 0a1 1 0 11-2 0 1 1 0 012 0z"
         />
       </svg>
-      Cart
+      <span>Cart</span>
       {getTotalItems() > 0 && (
-        <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold px-2.5 py-0.5 rounded-full">
+        <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold px-2 py-0.5 rounded-full">
           {getTotalItems()}
         </span>
       )}
@@ -479,19 +822,19 @@ export default function Navbar() {
   return (
     <>
       <nav className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md shadow-sm border-b border-gray-100">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-20">
             {/* Logo */}
             <div
               className="flex items-center cursor-pointer"
               onClick={(e) => handleNavClick("home", e)}
             >
-              <div className="relative w-48 h-20">
+              <div className="relative w-40 h-16 sm:w-44 sm:h-20">
                 <Image
                   src="/images/Asia-Website-logo.png"
                   alt="Asia Premium Water"
                   fill
-                  sizes="(max-width: 768px) 180px, 220px"
+                  sizes="(max-width: 640px) 160px, 200px"
                   priority
                   style={{ objectFit: "contain" }}
                   className="logo-glow"
@@ -500,17 +843,13 @@ export default function Navbar() {
             </div>
 
             {/* Desktop Navigation */}
-            <div className="hidden lg:flex items-center gap-x-9 text-base font-medium">
+            <div className="hidden lg:flex items-center gap-x-8 xl:gap-x-10 text-base font-medium">
               {navItems.map((item) => (
                 <a
                   key={item.id}
                   href={`#${item.id}`}
                   onClick={(e) => handleNavClick(item.id, e)}
-                  className={`transition-colors hover:text-cyan-700 ${
-                    activeSection === item.id
-                      ? "text-cyan-700"
-                      : "text-gray-700"
-                  }`}
+                  className={`transition-colors hover:text-cyan-700 ${activeSection === item.id ? "text-cyan-700 font-semibold" : "text-gray-700"}`}
                 >
                   {item.label}
                 </a>
@@ -532,7 +871,7 @@ export default function Navbar() {
                 </button>
 
                 {desktopMegaOpen && (
-                  <div className="absolute top-full left-1/2 -translate-x-1/2 mt-5 w-[740px] bg-white rounded-3xl shadow-2xl border border-gray-100 overflow-hidden">
+                  <div className="absolute top-full left-1/2 -translate-x-1/2 mt-6 w-[780px] bg-white rounded-3xl shadow-2xl border border-gray-100 overflow-hidden">
                     <div className="p-10 grid grid-cols-3 gap-8">
                       {(
                         ["retail", "wholesale", "institutions"] as ShopKey[]
@@ -540,9 +879,9 @@ export default function Navbar() {
                         <div
                           key={key}
                           onClick={() => openModal(key)}
-                          className="group p-6 rounded-2xl hover:bg-cyan-50 transition-all cursor-pointer"
+                          className="group p-6 rounded-2xl hover:bg-cyan-50 transition-all cursor-pointer border border-transparent hover:border-cyan-100"
                         >
-                          <div className="text-4xl mb-5">
+                          <div className="text-5xl mb-6">
                             {shopInfo[key].icon}
                           </div>
                           <h3 className="font-semibold text-xl text-gray-900 mb-3 group-hover:text-cyan-700">
@@ -572,7 +911,7 @@ export default function Navbar() {
                   <p className="text-xs text-gray-500 font-medium">
                     Call for Order
                   </p>
-                  <p className="font-semibold text-xl text-gray-800 tracking-tight">
+                  <p className="font-semibold text-xl text-gray-800">
                     0300-0628873
                   </p>
                 </div>
@@ -580,46 +919,50 @@ export default function Navbar() {
               <CartButton />
             </div>
 
-            {/* Mobile Right Side */}
-            <div className="lg:hidden flex items-center gap-4">
-              <a href="tel:03000628873" className="text-cyan-600">
+            {/* ==================== MOBILE RIGHT SIDE ==================== */}
+            <div className="lg:hidden flex items-center gap-3">
+              <a href="tel:03000628873" className="text-cyan-600 p-1">
                 <HiPhone size={28} />
               </a>
+
               <CartButton />
+
+              {/* Hamburger Icon - 3 Lines */}
               <button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="text-gray-700 p-1"
+                className="p-2 text-gray-700 hover:text-gray-900 transition-all"
+                aria-label="Toggle mobile menu"
               >
                 {mobileMenuOpen ? (
-                  <HiOutlineX size={30} />
+                  <HiOutlineX size={34} />
                 ) : (
-                  <HiOutlineMenu size={30} />
+                  <HiOutlineMenu size={34} />
                 )}
               </button>
             </div>
           </div>
         </div>
 
-        {/* Mobile Menu */}
+        {/* ==================== MOBILE MENU ==================== */}
         {mobileMenuOpen && (
           <div className="lg:hidden bg-white border-t shadow-md">
-            <div className="px-6 py-8 flex flex-col gap-6 text-lg">
+            <div className="px-6 py-8 flex flex-col gap-6 text-lg font-medium">
               {navItems.map((item) => (
                 <a
                   key={item.id}
                   href={`#${item.id}`}
                   onClick={(e) => handleNavClick(item.id, e)}
-                  className="text-gray-700 hover:text-cyan-700 font-medium py-1"
+                  className="text-gray-700 hover:text-cyan-700 py-1"
                 >
                   {item.label}
                 </a>
               ))}
 
-              {/* ==================== FIXED MOBILE SHOPS ==================== */}
-              <div>
+              {/* Mobile Shops Section */}
+              <div className="pt-6 border-t border-gray-200">
                 <button
                   onClick={() => setMobileShopOpen(!mobileShopOpen)}
-                  className="w-full flex justify-between items-center text-left font-medium text-gray-900 py-3 border-t border-b border-gray-200"
+                  className="w-full flex justify-between items-center text-left font-semibold text-gray-900 py-3 text-xl"
                 >
                   Shops
                   <span
@@ -630,13 +973,13 @@ export default function Navbar() {
                 </button>
 
                 {mobileShopOpen && (
-                  <div className="pl-4 mt-4 space-y-3">
+                  <div className="pl-2 mt-4 space-y-3">
                     {(["retail", "wholesale", "institutions"] as ShopKey[]).map(
                       (key) => (
                         <button
                           key={key}
                           onClick={() => openModal(key)}
-                          className="w-full text-left px-5 py-4 rounded-2xl border border-gray-100 hover:border-cyan-200 hover:bg-cyan-50 active:bg-cyan-100 transition-all text-gray-700 hover:text-cyan-700 font-medium active:scale-[0.98]"
+                          className="w-full text-left px-6 py-5 rounded-2xl border border-gray-100 hover:border-cyan-200 hover:bg-cyan-50 text-gray-700 hover:text-cyan-700 font-medium transition-all"
                         >
                           {shopInfo[key].title}
                         </button>
@@ -663,18 +1006,15 @@ export default function Navbar() {
             <div className="text-6xl text-center mb-6">
               {shopInfo[openShopModal].icon}
             </div>
-
             <h2 className="text-3xl font-bold text-center mb-6">
               {shopInfo[openShopModal].title}
             </h2>
-
             <p className="text-gray-600 text-center leading-relaxed text-lg">
               {shopInfo[openShopModal].content}
             </p>
-
             <button
               onClick={closeModal}
-              className="mt-10 w-full py-4 bg-cyan-600 hover:bg-cyan-700 active:bg-cyan-800 text-white rounded-2xl font-semibold text-lg transition-all"
+              className="mt-10 w-full py-4 bg-cyan-600 hover:bg-cyan-700 text-white rounded-2xl font-semibold text-lg transition-all"
             >
               Close
             </button>
