@@ -12,9 +12,9 @@ import banner3 from "../public/images/banner-3.jpeg";
 import banner4 from "../public/images/banner-4.jpeg";
 import banner5 from "../public/images/banner-5.png";
 import banner6 from "../public/images/banner-6.jpeg";
-import banner7 from "../public/images/banner-7.png";
 
-const banners = [banner1, banner2, banner3, banner4, banner5, banner6, banner7];
+
+const banners = [banner1, banner2, banner3, banner4, banner5, banner6];
 
 const Banner = () => {
   const [activeSlide, setActiveSlide] = useState(0);

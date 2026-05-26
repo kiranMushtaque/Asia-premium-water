@@ -1,5 +1,10 @@
 
 
+
+
+
+
+
 // "use client";
 
 // import { useState, useEffect } from "react";
@@ -92,7 +97,6 @@
 //   gradient: "from-orange-400 to-red-500",
 // };
 
-
 // export default function ProductsPage() {
 //   const { addToCart } = useCart();
 //   const [hoveredProduct, setHoveredProduct] = useState<number | null>(null);
@@ -142,57 +146,49 @@
 
 //   return (
 //     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50">
-     
-//       {/* WOW OFFER */}
-//       <motion.div className="max-w-6xl mx-auto mb-12 sm:mb-16 px-4 pt-8">
-//         <div className="relative bg-gradient-to-br from-orange-400 via-yellow-400 to-red-400 rounded-3xl p-1">
-//           <div className="bg-white rounded-3xl p-6 sm:p-8 flex flex-col lg:flex-row items-center justify-between gap-6 lg:gap-8">
-//             <div className="flex-1 text-center lg:text-left space-y-3">
-//               <motion.h2
-//                 animate={{ scale: [1, 1.05, 1] }}
-//                 transition={{ duration: 2, repeat: Infinity }}
-//                 className="text-3xl sm:text-4xl lg:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-orange-500 via-red-500 to-pink-500"
-//               >
-//                 WOW OFFER!
-//               </motion.h2>
-//               <p className="text-xl sm:text-2xl font-bold text-gray-900">
-//                 Buy 12 cartons, get 1 FREE
-//               </p>
-//               <p className="text-lg sm:text-xl font-semibold text-orange-600">
-//                 500ml
-//               </p>
-//               <p className="text-sm sm:text-base text-gray-600">
-//                 Limited‑time bulk deal. While stocks last.
-//               </p>
-//             </div>
-//             <div className="relative w-full sm:w-80 lg:w-96 flex-shrink-0">
-//               {imageErrors[wowOffer.id] ? (
-//                 <div className="bg-gray-200 border-2 border-dashed rounded-xl w-full h-48 sm:h-56" />
-//               ) : (
-//                 <Image
-//                   src={wowOffer.image}
-//                   alt={wowOffer.name}
-//                   width={384}
-//                   height={256}
-//                   className="rounded-2xl shadow-xl border-4 border-white w-full h-auto object-contain"
-//                   onError={() =>
-//                     setImageErrors((p) => ({ ...p, [wowOffer.id]: true }))
-//                   }
-//                 />
-//               )}
-//             </div>
-//             <motion.button
-//               onClick={handleAddWowOfferToCart}
-//               whileHover={{ scale: 1.05 }}
-//               whileTap={{ scale: 0.95 }}
-//               className="px-6 py-3 bg-gradient-to-r from-green-500 to-green-600 text-white font-bold rounded-2xl shadow-lg"
+    
+//       {/* new OFFER */}
+//       <motion.div
+//         initial={{ opacity: 0, scale: 0.95 }}
+//         animate={{ opacity: 1, scale: 1 }}
+//         transition={{ duration: 0.5 }}
+//         className="max-w-4xl mx-auto mb-20 px-4"
+//       >
+//         <div className="relative rounded-3xl p-[2px] bg-gradient-to-br from-orange-500 via-red-500 to-pink-500 shadow-xl">
+//           <div className="bg-white rounded-3xl p-4 sm:p-6 flex items-center justify-center">
+//             {/* Image (BIG + ANIMATED) */}
+//             <motion.div
+//               initial={{ y: 20, opacity: 0 }}
+//               animate={{ y: 0, opacity: 1 }}
+//               transition={{ delay: 0.2, duration: 0.5 }}
+//               whileHover={{ scale: 1.03 }}
+//               className="w-full"
 //             >
-//               🛒 Add WOW OFFER
-//             </motion.button>
+//               <div className="relative w-full aspect-square sm:aspect-[4/3] lg:aspect-[16/9]">
+//                 {imageErrors[wowOffer.id] ? (
+//                   <div className="bg-gray-100 border-2 border-dashed border-gray-300 rounded-2xl w-full h-full flex items-center justify-center">
+//                     <span className="text-gray-400">Product Image</span>
+//                   </div>
+//                 ) : (
+//                   <Image
+//                     src={wowOffer.image}
+//                     alt={wowOffer.name}
+//                     fill
+//                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 80vw, 600px"
+//                     className="object-contain rounded-2xl"
+//                     onError={() =>
+//                       setImageErrors((prev) => ({
+//                         ...prev,
+//                         [wowOffer.id]: true,
+//                       }))
+//                     }
+//                   />
+//                 )}
+//               </div>
+//             </motion.div>
 //           </div>
 //         </div>
 //       </motion.div>
-
 //       {/* Products Grid */}
 //       <div className="max-w-7xl mx-auto px-4" id="products">
 //         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -414,17 +410,7 @@ const products: Product[] = [
   },
 ];
 
-const wowOffer: Product = {
-  id: 999,
-  name: "WOW OFFER · 12+1",
-  size: "12 Cartons (500ml) + Get 1 Carton FREE",
-  image: "/images/wowpop.jpeg",
-  price: 12 * 360,
-  description:
-    "Buy 12 cartons (500ml each) and get 1 FREE. Limited‑time bulk deal.",
-  badge: "WOW OFFER",
-  gradient: "from-orange-400 to-red-500",
-};
+
 
 export default function ProductsPage() {
   const { addToCart } = useCart();
@@ -446,11 +432,7 @@ export default function ProductsPage() {
     setShowToast(true);
   };
 
-  const handleAddWowOfferToCart = () => {
-    addToCart(wowOffer as ContextProduct);
-    setToastMessage("WOW OFFER added to cart!");
-    setShowToast(true);
-  };
+ 
 
   const handleNotifySubmit = (productId: number) => {
     const email = (notifyEmail[productId] || "").trim();
@@ -475,49 +457,8 @@ export default function ProductsPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50">
-    
       {/* new OFFER */}
-      <motion.div
-        initial={{ opacity: 0, scale: 0.95 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.5 }}
-        className="max-w-4xl mx-auto mb-20 px-4"
-      >
-        <div className="relative rounded-3xl p-[2px] bg-gradient-to-br from-orange-500 via-red-500 to-pink-500 shadow-xl">
-          <div className="bg-white rounded-3xl p-4 sm:p-6 flex items-center justify-center">
-            {/* Image (BIG + ANIMATED) */}
-            <motion.div
-              initial={{ y: 20, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 0.2, duration: 0.5 }}
-              whileHover={{ scale: 1.03 }}
-              className="w-full"
-            >
-              <div className="relative w-full aspect-square sm:aspect-[4/3] lg:aspect-[16/9]">
-                {imageErrors[wowOffer.id] ? (
-                  <div className="bg-gray-100 border-2 border-dashed border-gray-300 rounded-2xl w-full h-full flex items-center justify-center">
-                    <span className="text-gray-400">Product Image</span>
-                  </div>
-                ) : (
-                  <Image
-                    src={wowOffer.image}
-                    alt={wowOffer.name}
-                    fill
-                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 80vw, 600px"
-                    className="object-contain rounded-2xl"
-                    onError={() =>
-                      setImageErrors((prev) => ({
-                        ...prev,
-                        [wowOffer.id]: true,
-                      }))
-                    }
-                  />
-                )}
-              </div>
-            </motion.div>
-          </div>
-        </div>
-      </motion.div>
+    
       {/* Products Grid */}
       <div className="max-w-7xl mx-auto px-4" id="products">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
